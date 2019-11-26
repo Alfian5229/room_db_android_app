@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Room DB</string>
+    <string name="placeholder_name">Input Your Name</string>
+    <string name="placeholder_gmail_com">Input Your Email</string>
+    <string name="image_view">Image View</string>
+    <string name="hint_first_name">Enter First Name</string>
+    <string name="hint_last_name">Enter Last Name</string>
+    <string name="hint_email">Enter Email</string>
+    <string name="hint_phone_no">Enter Phone Number</string>
+    <string name="hint_address">Enter Address</string>
+    <string name="add_user">Add User</string>
+    <string name="error_msg_firstname">Error, name is not valid</string>
+    <string name="error_msg_email">Error, email not valid</string>
+</resources>
