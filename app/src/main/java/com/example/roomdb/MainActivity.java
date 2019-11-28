@@ -7,47 +7,47 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.roomdb.databinding.ActivityMainBinding;
 import com.example.roomdb.db.AppDatabase;
 import com.example.roomdb.db.model.User;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements UserAdapter.Callback {
 
-    @BindView(R.id.recyclerView)
-    RecyclerView mRecyclerView;
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
     AppDatabase database;
-
     UserAdapter mUserAdapter;
     LinearLayoutManager mLayoutManager;
+
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        database=AppDatabase.getDatabaseInstance(this);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        database = AppDatabase.getDatabaseInstance(this);
         setUp();
     }
 
     private void setUp() {
         mLayoutManager = new LinearLayoutManager(this);
         mLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        RecyclerView recyclerView = binding.recyclerView;
+
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
         mUserAdapter = new UserAdapter(new ArrayList<User>());
         mUserAdapter.setCallback(this);
-        prepareDemoContent();
-        mRecyclerView.setAdapter(mUserAdapter);
 
+        prepareDemoContent();
+        recyclerView.setAdapter(mUserAdapter);
     }
 
     private void prepareDemoContent() {
@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements UserAdapter.Callb
 
         User mUser4 = new User("Kapil", "sharma", "kapil@gmail.com", null, null, null, new Date(), new Date());
         database.userDao().insertUser(mUser4);
-
     }
 
     @Override
